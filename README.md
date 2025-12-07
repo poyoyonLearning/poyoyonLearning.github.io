@@ -25,4 +25,4 @@ PoYoYonLearning@gmail.com
 
 ## ライセンス
 
-© 2024 PoYoYon Learning. All rights reserved.
+© 2025 PoYoYon Learning. All rights reserved.
