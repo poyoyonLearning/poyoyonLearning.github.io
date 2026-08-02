@@ -1,135 +1,547 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PoYoYon Learning プライバシーポリシー">
-    <title>プライバシーポリシー | PoYoYon Learning</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PoYoYonLearning および「ぽよタッチベビ」のプライバシーポリシー。個人情報を一切収集せず、完全オフラインで動作します。" />
+  <title>プライバシーポリシー — PoYoYonLearning</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=M+PLUS+Rounded+1c:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ---------- Tokens (トップページと同一) ---------- */
+    :root {
+      --paper:    #F7F3EB;
+      --paper-hi: #FBF8F2;
+      --ink:      #1C1B19;
+      --ink-soft: #3A3936;
+      --mute:     #6E6A63;
+      --rule:     #E2DCCC;
+
+      --accent:      #2F4858;
+      --accent-soft: #E5EBEE;
+
+      --sunny:      #F2C84B;
+      --sunny-soft: #FBEBB6;
+      --coral:      #E68F75;
+      --coral-soft: #F8D9CE;
+      --mint:       #7DBFA5;
+      --mint-soft:  #D6EAE0;
+      --sky:        #8FB4D1;
+
+      --font-sans:  "Noto Sans JP", "Hiragino Sans", system-ui, sans-serif;
+      --font-round: "M PLUS Rounded 1c", "Hiragino Sans", system-ui, sans-serif;
+      --font-mono:  "JetBrains Mono", ui-monospace, monospace;
+    }
+
+    html, body { margin: 0; padding: 0; background: var(--paper); }
+    body {
+      font-family: var(--font-sans); color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { -webkit-tap-highlight-color: transparent; }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    /* ---------- Top bar ---------- */
+    .topbar {
+      position: sticky; top: 0; z-index: 5;
+      background: rgba(247, 243, 235, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+      padding: 14px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--font-round); font-size: 17px; font-weight: 700;
+      letter-spacing: .005em; color: var(--ink);
+      text-decoration: none;
+    }
+    .brand .dot {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: radial-gradient(circle at 32% 28%, #fff 0%, var(--coral) 38%, var(--coral) 62%, rgba(0,0,0,.08) 100%);
+      box-shadow: 0 5px 12px -5px #E68F7588;
+    }
+    .nav { display: flex; gap: 4px; align-items: center; }
+    .nav a {
+      padding: 8px 14px; color: var(--ink-soft);
+      font-size: 13px; font-weight: 500; text-decoration: none;
+    }
+    .nav a.current { color: var(--ink); font-weight: 600; }
+    .nav .cta {
+      padding: 9px 18px; color: var(--paper); background: var(--accent);
+      font-size: 13px; font-weight: 600; border-radius: 999px; margin-left: 8px;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      padding: 84px 48px 56px;
+      text-align: center;
+      background:
+        radial-gradient(circle 4px at 12% 22%, #F2C84B33 0 100%, transparent 100%),
+        radial-gradient(circle 3px at 28% 70%, #E68F7533 0 100%, transparent 100%),
+        radial-gradient(circle 5px at 70% 18%, #7DBFA533 0 100%, transparent 100%),
+        radial-gradient(circle 3px at 82% 60%, #8FB4D140 0 100%, transparent 100%),
+        radial-gradient(circle 4px at 50% 88%, #E68F7530 0 100%, transparent 100%),
+        radial-gradient(circle 3px at 92% 32%, #F2C84B33 0 100%, transparent 100%),
+        linear-gradient(180deg, var(--paper-hi) 0%, var(--paper) 100%);
+      position: relative; overflow: hidden;
+    }
+    .breadcrumbs {
+      display: inline-flex; gap: 8px; align-items: center;
+      font-size: 12px; color: var(--mute);
+      letter-spacing: .04em; margin-bottom: 24px;
+    }
+    .breadcrumbs a { color: var(--mute); text-decoration: none; }
+    .breadcrumbs a:hover { color: var(--ink); }
+    .breadcrumbs .sep { opacity: .5; }
+
+    .hero h1 {
+      margin: 0 auto; max-width: 820px;
+      font-family: var(--font-round); font-size: 40px; line-height: 1.4;
+      font-weight: 700; letter-spacing: .005em; color: var(--ink);
+    }
+    .hero .lede {
+      margin: 24px auto 0; max-width: 620px;
+      font-size: 15.5px; line-height: 2; color: var(--ink-soft);
+    }
+    .hero .meta {
+      margin-top: 28px;
+      display: inline-flex; gap: 18px; align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11.5px; letter-spacing: .08em;
+      color: var(--mute);
+    }
+    .hero .meta b { color: var(--ink); font-weight: 600; }
+
+    /* ---------- TL;DR card ---------- */
+    .tldr-wrap { padding: 0 48px; }
+    .tldr {
+      max-width: 1040px; margin: -32px auto 0;
+      background: var(--paper-hi);
+      border: 1px solid var(--rule);
+      border-radius: 20px;
+      padding: 32px 40px;
+      display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px;
+      align-items: center;
+      box-shadow: 0 30px 60px -32px rgba(28,27,25,.18);
+    }
+    .tldr .eyebrow {
+      font-size: 11.5px; letter-spacing: .3em; font-weight: 600;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .tldr .eyebrow::before {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--mint); display: inline-block;
+    }
+    .tldr h2 {
+      margin: 0; font-family: var(--font-round); font-weight: 700;
+      font-size: 22px; line-height: 1.5;
+    }
+    .tldr .pills {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: flex-end;
+    }
+    .pill {
+      padding: 9px 16px 9px 12px;
+      font-size: 13px; font-weight: 600; letter-spacing: .02em;
+      border-radius: 999px;
+      color: var(--ink-soft);
+      border: 1px solid var(--rule);
+      background: var(--paper);
+      white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .pill .pdot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .pill.no-ads     .pdot { background: var(--coral); }
+    .pill.no-iap     .pdot { background: var(--sunny); }
+    .pill.no-collect .pdot { background: var(--sky); }
+    .pill.no-third   .pdot { background: var(--coral); }
+
+    /* ---------- Body ---------- */
+    main { padding: 72px 48px 48px; }
+    .doc {
+      max-width: 1040px; margin: 0 auto;
+      display: grid; grid-template-columns: 260px 1fr; gap: 64px;
+      align-items: flex-start;
+    }
+    /* TOC */
+    .toc {
+      position: sticky; top: 96px;
+      font-size: 13px; line-height: 1.9; color: var(--mute);
+    }
+    .toc .eyebrow {
+      font-size: 10.5px; letter-spacing: .28em; font-weight: 600;
+      color: var(--mute); text-transform: uppercase; margin-bottom: 14px;
+    }
+    .toc ol {
+      list-style: none; padding: 0; margin: 0;
+      border-left: 1px solid var(--rule);
+    }
+    .toc li {
+      counter-increment: toc;
+      padding: 4px 0 4px 16px;
+      position: relative;
+    }
+    .toc li::before {
+      content: counter(toc, decimal-leading-zero);
+      position: absolute; left: -1px; top: 6px;
+      transform: translateX(-50%);
+      background: var(--paper);
+      color: var(--mute);
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: .02em;
+      padding: 0 4px;
+    }
+    .toc ol { counter-reset: toc; }
+    .toc a { color: var(--ink-soft); text-decoration: none; }
+    .toc a:hover { color: var(--accent); }
+
+    /* Articles */
+    .articles { counter-reset: art; }
+    .art {
+      counter-increment: art;
+      padding: 24px 0 36px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .art:last-child { border-bottom: 0; }
+    .art .num {
+      font-family: var(--font-mono);
+      font-size: 11px; letter-spacing: .12em;
+      color: var(--mute);
+      margin-bottom: 10px;
+    }
+    .art .num::before {
+      content: counter(art, decimal-leading-zero) " /";
+      margin-right: 8px; color: var(--accent); font-weight: 600;
+    }
+    .art h2 {
+      margin: 0 0 18px;
+      font-family: var(--font-round);
+      font-size: 22px; line-height: 1.45; font-weight: 700;
+      letter-spacing: .005em;
+    }
+    .art p {
+      margin: 0 0 14px;
+      font-size: 15px; line-height: 2;
+      color: var(--ink-soft);
+      text-wrap: pretty;
+    }
+    .art p:last-child { margin-bottom: 0; }
+    .art strong { color: var(--ink); font-weight: 600; }
+    .art ul {
+      margin: 4px 0 14px; padding: 0;
+      list-style: none;
+    }
+    .art ul li {
+      position: relative; padding: 4px 0 4px 22px;
+      font-size: 15px; line-height: 1.95;
+      color: var(--ink-soft);
+    }
+    .art ul li::before {
+      content: ''; position: absolute; left: 4px; top: 16px;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* Plain key-value summary tables inside articles */
+    .kv {
+      display: grid; grid-template-columns: 220px 1fr;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+      margin: 18px 0 6px;
+    }
+    .kv > div {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--rule);
+      font-size: 14px; line-height: 1.7;
+    }
+    .kv .k {
+      color: var(--mute);
+      font-family: var(--font-mono);
+      font-size: 11px; letter-spacing: .04em;
+      padding-top: 14px;
+    }
+    .kv .v { color: var(--ink); }
+    .kv .v.yes { color: var(--mint); font-weight: 600; }
+    .kv .v.no  { color: var(--coral); font-weight: 600; }
+
+    /* ---------- Contact ---------- */
+    .contact-card {
+      max-width: 1040px; margin: 24px auto 0;
+      padding: 36px 40px;
+      background: var(--paper-hi);
+      border: 1px solid var(--rule);
+      border-radius: 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 32px; flex-wrap: wrap;
+    }
+    .contact-card .left {
+      display: flex; align-items: flex-start; gap: 18px;
+    }
+    .contact-card .ic {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--accent-soft); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-card .eyebrow {
+      font-size: 11.5px; letter-spacing: .3em; font-weight: 600;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 8px;
+    }
+    .contact-card h3 {
+      margin: 0 0 4px; font-family: var(--font-round); font-weight: 700;
+      font-size: 20px; line-height: 1.55;
+    }
+    .contact-card p { margin: 0; color: var(--ink-soft); font-size: 14px; line-height: 1.8; }
+    .contact-card .mail {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 26px;
+      background: var(--accent); color: var(--paper);
+      text-decoration: none; font-size: 14px; font-weight: 700;
+      letter-spacing: .04em; border-radius: 999px;
+      font-family: var(--font-mono);
+      white-space: nowrap;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 40px 48px; margin-top: 72px;
+      text-align: center;
+    }
+    footer p {
+      margin: 0; font-size: 12px; color: var(--mute); letter-spacing: .04em;
+    }
+    footer a { color: var(--ink-soft); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .topbar { padding: 12px 22px; }
+      .nav a { padding: 6px 8px; font-size: 12px; }
+      .hero { padding: 64px 22px 48px; }
+      .hero h1 { font-size: 30px; }
+      .tldr-wrap { padding: 0 22px; }
+      .tldr { grid-template-columns: 1fr; padding: 24px; }
+      .tldr .pills { justify-content: flex-start; }
+      main { padding: 56px 22px 40px; }
+      .doc { grid-template-columns: 1fr; gap: 32px; }
+      .toc { position: static; }
+      .art h2 { font-size: 20px; }
+      .kv { grid-template-columns: 1fr; }
+      .kv .k { padding-top: 12px; padding-bottom: 0; border-bottom: 0; }
+      .kv .v { padding-top: 2px; }
+      .contact-card { padding: 24px; }
+      footer { padding: 32px 22px; }
+    }
+  </style>
 </head>
-
 <body>
-    <div class="container">
-        <header>
-            <h1>プライバシーポリシー</h1>
-            <p class="subtitle">PoYoYon Learning</p>
-        </header>
 
-        <main>
-            <section class="section">
-                <p>
-                    PoYoYon Learning（以下、「当方」）が提供するアプリケーション（以下、「本アプリ」）におけるプライバシー情報の取り扱いについて、以下のとおり定めます。
-                </p>
-            </section>
+  <!-- Top bar -->
+  <header class="topbar">
+    <a href="../index.html" class="brand">
+      <span class="dot"></span>
+      PoYoYonLearning
+    </a>
+    <nav class="nav">
+      <a href="../index.html#app">アプリ</a>
+      <a href="./" class="current">プライバシー</a>
+      <a class="cta" href="mailto:PoYoYonLearning@gmail.com">お問い合わせ</a>
+    </nav>
+  </header>
 
-            <section class="section">
-                <h2>1. 収集する情報について</h2>
-                <p>
-                    当方は、本アプリにおいて<strong>利用者の個人情報や利用データを一切収集しません</strong>。<br>
-                    以下の情報も取得していません：
-                </p>
-                <ul>
-                    <li>氏名・住所・メールアドレス等の個人情報</li>
-                    <li>デバイス情報・広告ID</li>
-                    <li>位置情報</li>
-                    <li>アプリの利用履歴・分析データ</li>
-                    <li>カメラ、マイク、ストレージ等のアクセス権限情報</li>
-                </ul>
-            </section>
-
-            <section class="section">
-                <h2>2. 外部への送信について</h2>
-                <p>
-                    本アプリはインターネット通信を行わず、データを外部に送信しません。<br>
-                    サーバーとのデータ送受信やサードパーティサービスへのデータ提供はありません。<br>
-                    また、本アプリは第三者の広告SDK、解析ツール、クラッシュレポートサービス等を使用していません。
-                </p>
-            </section>
-
-            <section class="section">
-                <h2>3. 広告・課金について</h2>
-                <p>本アプリは以下の機能を含みません：</p>
-                <ul>
-                    <li>広告配信</li>
-                    <li>アプリ内課金</li>
-                    <li>サードパーティ SDK の利用</li>
-                </ul>
-            </section>
-
-            <section class="section">
-                <h2>4. 子どものプライバシー</h2>
-                <p>
-                    本アプリは未就学児を主な対象としています。<br>
-                    当方は子どものプライバシー保護を重視しており、個人情報の収集や外部通信を行わない設計としています。<br>
-                    また、保護者の同意なしに子どもの個人情報を収集することはありません。
-                </p>
-
-                <p>利用者の安全のため、以下の方針を採用しています：</p>
-
-                <ul>
-                    <li>本アプリ内には広告を表示しません</li>
-                    <li>他者と通信・共有する仕組みを持ちません</li>
-                    <li>課金導線を設置していません</li>
-                    <li>外部サイトへのアクセスは、保護者向け確認（ペアレンタルゲート）を通過した場合のみ可能です</li>
-                </ul>
-            </section>
-
-            <section class="section">
-                <h2>5. 変更について</h2>
-                <p>
-                    ポリシーの内容は、必要に応じて変更される場合があります。<br>
-                    変更後は本ページに速やかに掲載します。
-                </p>
-            </section>
-
-            <section class="section">
-                <h2>6. お問い合わせ窓口</h2>
-                <p>本ポリシーに関するお問い合わせは、以下にお願いいたします：</p>
-                <p style="margin-top: 20px;">
-                    <strong>PoYoYon Learning</strong><br>
-                    メール：<a href="mailto:PoYoYonLearning@gmail.com">PoYoYonLearning@gmail.com</a>
-                </p>
-            </section>
-
-            <section class="section">
-                <h2>対象アプリ</h2>
-                <ul>
-                    <li>ぽよタッチベビ 3Dコレクション（PoYo Touch Baby 3D Collection）</li>
-                    <li>今後追加される可能性があります</li>
-                </ul>
-            </section>
-
-            <section class="section">
-                <h2>利用環境</h2>
-                <p>
-                    本アプリは完全オフラインで動作します。インターネット接続は不要です。
-                </p>
-            </section>
-
-            <section class="section">
-                <h2>保護者の方へ</h2>
-                <p>
-                    本アプリは保護者の方が安心して利用できるよう、広告や課金要素を含みません。<br>
-                    また、外部サイトへのアクセスは保護者向け確認（ペアレンタルゲート）を通過した場合のみ可能です。<br>
-                    お子様が安全に楽しく遊べる環境を提供することを目的としています。
-                </p>
-            </section>
-
-            <div
-                style="text-align: center; margin: 40px 0; padding: 20px; background-color: #f5f5f5; border-radius: 8px;">
-                <p style="font-size: 14px; color: #666;">最終更新日：2026年3月9日</p>
-            </div>
-
-            <p style="text-align: center; margin-top: 30px;">
-                <a href="../index.html" class="button-link">トップページに戻る</a>
-            </p>
-        </main>
-
-        <footer>
-            <p>&copy; 2025 PoYoYon Learning. All rights reserved.</p>
-        </footer>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="breadcrumbs">
+      <a href="../index.html">PoYoYonLearning</a>
+      <span class="sep">/</span>
+      <span>プライバシーポリシー</span>
     </div>
-</body>
+    <h1>プライバシーポリシー</h1>
+    <p class="lede">
+      PoYoYon Learning（以下「当方」）が提供するアプリケーション（以下「本アプリ」）における<br/>
+      プライバシー情報の取り扱いについて、以下のとおり定めます。
+    </p>
+    <div class="meta">
+      <span>最終更新日 · <b>2026.08.02</b></span>
+    </div>
+  </section>
 
+  <!-- TL;DR -->
+  <div class="tldr-wrap">
+    <div class="tldr">
+      <div>
+        <div class="eyebrow">In short · 要点</div>
+        <h2>個人情報を一切収集せず、<br/>外部にデータを送信しません。</h2>
+      </div>
+      <div class="pills">
+        <span class="pill no-collect"><span class="pdot"></span>収集なし</span>
+        <span class="pill no-ads"><span class="pdot"></span>広告なし</span>
+        <span class="pill no-iap"><span class="pdot"></span>課金なし</span>
+        <span class="pill no-third"><span class="pdot"></span>第三者送信なし</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <main>
+    <div class="doc">
+
+      <!-- TOC -->
+      <aside class="toc">
+        <div class="eyebrow">Contents</div>
+        <ol>
+          <li><a href="#s1">基本方針</a></li>
+          <li><a href="#s2">収集する情報について</a></li>
+          <li><a href="#s3">外部への送信について</a></li>
+          <li><a href="#s4">広告・課金について</a></li>
+          <li><a href="#s5">子どものプライバシー</a></li>
+          <li><a href="#s6">対象アプリ</a></li>
+          <li><a href="#s7">変更について</a></li>
+          <li><a href="#s8">お問い合わせ窓口</a></li>
+        </ol>
+      </aside>
+
+      <!-- Articles -->
+      <div class="articles">
+
+        <article class="art" id="s1">
+          <div class="num">基本方針</div>
+          <h2>プライバシーポリシーについて</h2>
+          <p>
+            PoYoYon Learning（以下「当方」）が提供するアプリケーション（以下「本アプリ」）における
+            プライバシー情報の取り扱いについて、以下のとおり定めます。
+          </p>
+        </article>
+
+        <article class="art" id="s2">
+          <div class="num">収集する情報について</div>
+          <h2>収集する情報について</h2>
+          <p>
+            当方は、本アプリにおいて<strong>利用者の個人情報や利用データを一切収集しません</strong>。
+            以下の情報も取得していません：
+          </p>
+          <div class="kv">
+            <div class="k">氏名・住所・メールアドレス等</div><div class="v no">収集しません</div>
+            <div class="k">デバイス情報・広告ID</div><div class="v no">収集しません</div>
+            <div class="k">位置情報</div><div class="v no">収集しません</div>
+            <div class="k">アプリの利用履歴・分析データ</div><div class="v no">収集しません</div>
+            <div class="k">カメラ・マイク・ストレージ等のアクセス権限情報</div><div class="v no">取得しません</div>
+          </div>
+        </article>
+
+        <article class="art" id="s3">
+          <div class="num">外部への送信について</div>
+          <h2>外部への送信について</h2>
+          <p>
+            本アプリはインターネット通信を行わず、データを外部に送信しません。<br/>
+            サーバーとのデータ送受信やサードパーティサービスへのデータ提供はありません。<br/>
+            また、本アプリは第三者の広告SDK、解析ツール、クラッシュレポートサービス等を使用していません。
+          </p>
+          <p>
+            なお、本アプリ内から本ページなど外部のコンテンツへのリンクを開く場合は、
+            保護者向け確認（ペアレンタルゲート）を通過したうえで、端末標準のブラウザで表示されます。
+            この操作自体によって当方や第三者にデータが送信されることはありません。
+          </p>
+          <p>
+            なお、アプリ・サービスの種類によっては、配信元サーバーからのデータ取得
+            （アプリ本体やフォント等の表示に必要な通信）が発生する場合があります。
+            この通信によって利用者の個人情報が収集・送信されることはなく、
+            内容は対象アプリ・サービスの項目（第6条）に個別に記載します。
+          </p>
+        </article>
+
+        <article class="art" id="s4">
+          <div class="num">広告・課金について</div>
+          <h2>広告・課金について</h2>
+          <p>本アプリは以下の機能を含みません：</p>
+          <ul>
+            <li>広告配信</li>
+            <li>アプリ内課金</li>
+            <li>サードパーティ SDK の利用</li>
+          </ul>
+        </article>
+
+        <article class="art" id="s5">
+          <div class="num">子どものプライバシー</div>
+          <h2>子どものプライバシーについて</h2>
+          <p>
+            本アプリは未就学児を主な対象としています。<br/>
+            当方は子どものプライバシー保護を重視しており、個人情報の収集や外部通信を行わない設計としています。<br/>
+            また、保護者の同意なしに子どもの個人情報を収集することはありません。
+          </p>
+          <p>利用者の安全のため、以下の方針を採用しています：</p>
+          <ul>
+            <li>本アプリ内には広告を表示しません</li>
+            <li>他者と通信・共有する仕組みを持ちません</li>
+            <li>課金導線を設置していません</li>
+            <li>外部サイトへのアクセスは、保護者向け確認（ペアレンタルゲート）を通過した場合のみ可能です</li>
+          </ul>
+        </article>
+
+        <article class="art" id="s6">
+          <div class="num">対象アプリ</div>
+          <h2>対象アプリについて</h2>
+          <ul>
+            <li>ぽよタッチベビ 3Dコレクション（PoYo Touch Baby 3D Collection）：完全オフラインで動作します。</li>
+            <li>
+              今後、Webブラウザ上で利用する形式のサービスを追加する可能性があります。
+              その場合、ページの表示に必要な通信（自社配信サーバーからのHTML・フォント等の取得）は発生しますが、
+              個人情報の収集・第三者への送信は行いません。
+            </li>
+          </ul>
+        </article>
+
+        <article class="art" id="s7">
+          <div class="num">変更について</div>
+          <h2>本ポリシーの変更について</h2>
+          <p>
+            ポリシーの内容は、必要に応じて変更される場合があります。<br/>
+            変更後は本ページに速やかに掲載します。
+          </p>
+        </article>
+
+        <article class="art" id="s8">
+          <div class="num">お問い合わせ窓口</div>
+          <h2>お問い合わせ窓口</h2>
+          <p>
+            本ポリシーに関するお問い合わせは、下記の窓口までお願いいたします。
+          </p>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- Contact card -->
+    <div class="contact-card">
+      <div class="left">
+        <div class="ic" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/>
+            <path d="M4 7 l8 6 l8-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="eyebrow">Contact</div>
+          <h3>PoYoYon Learning</h3>
+          <p>ご質問・ご要望は、下記メールアドレスまでお願いいたします。</p>
+        </div>
+      </div>
+      <a class="mail" href="mailto:PoYoYonLearning@gmail.com">
+        PoYoYonLearning@gmail.com
+      </a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 PoYoYon Learning. All rights reserved.</p>
+  </footer>
+
+</body>
 </html>

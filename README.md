@@ -15,9 +15,13 @@ GitHub Pagesを使用してホスティングされています。
 
 ## サイト構成
 
-- `index.html` - トップページ
-- `privacy.html` - プライバシーポリシー
-- `css/style.css` - 共通スタイルシート
+トップページは React（CDN経由）+ Babel Standalone による単一ページ構成です。ビルド不要で、ブラウザ上で直接 JSX を実行しています。
+
+- `index.html` - トップページ（React のマウント先とスクリプト読み込みのみ）
+- `shared.jsx` - デザイントークン（配色・コピー等）と共通コンポーネント
+- `variation-d.jsx` - トップページ本体のコンポーネント（`VariationD`）
+- `privacy/index.html` - プライバシーポリシー（静的HTML、トップページと同じデザイントークンを使用）
+- `assets/` - アイコン・アプリ内画像・ロゴ等の画像アセット
 
 ## お問い合わせ
 
@@ -25,4 +29,4 @@ PoYoYonLearning@gmail.com
 
 ## ライセンス
 
-© 2025 PoYoYon Learning. All rights reserved.
+© 2026 PoYoYon Learning. All rights reserved.
